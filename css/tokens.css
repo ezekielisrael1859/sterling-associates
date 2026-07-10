@@ -1,0 +1,78 @@
+/* ============================================
+   STERLING & ASSOCIATES — DESIGN TOKENS
+   ============================================ */
+
+:root {
+  /* Colors */
+  --color-navy: #1B2430;
+  --color-navy-light: #2A3547;
+  --color-white: #FFFFFF;
+  --color-off-white: #F7F6F3;
+  --color-gold: #A8874F;
+  --color-gold-muted: #C7B08A;
+  --color-ink: #1B2430;
+  --color-ink-soft: #4A5568;
+  --color-border: #E2E0DA;
+  --color-border-dark: #33404F;
+
+  /* Typography */
+  --font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-md: 1.125rem;
+  --fs-lg: 1.375rem;
+  --fs-xl: 1.75rem;
+  --fs-2xl: 2.25rem;
+  --fs-3xl: 3rem;
+  --fs-4xl: 3.75rem;
+
+  --lh-tight: 1.15;
+  --lh-snug: 1.35;
+  --lh-normal: 1.6;
+  --lh-relaxed: 1.8;
+
+  --ls-wide: 0.08em;
+  --ls-wider: 0.14em;
+
+  /* Spacing (8px base) */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-5: 3rem;
+  --space-6: 4rem;
+  --space-7: 6rem;
+  --space-8: 8rem;
+
+  /* Layout */
+  --container-max: 1200px;
+  --container-narrow: 760px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+
+  /* Motion */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 0.2s;
+  --duration-base: 0.4s;
+  --duration-slow: 0.7s;
+
+  /* Shadows (minimal, used sparingly) */
+  --shadow-sm: 0 1px 3px rgba(27, 36, 48, 0.08);
+  --shadow-md: 0 4px 16px rgba(27, 36, 48, 0.1);
+
+  /* Z-index */
+  --z-nav: 100;
+  --z-mobile-nav: 90;
+  --z-overlay: 200;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0.01ms;
+    --duration-base: 0.01ms;
+    --duration-slow: 0.01ms;
+  }
+}
