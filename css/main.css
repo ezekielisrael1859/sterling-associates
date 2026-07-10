@@ -46,6 +46,19 @@ ul, ol { list-style: none; }
   color: var(--color-navy);
 }
 
+/* ============ TEXTURE OVERLAY (subtle linen grain) ============ */
+.approach::before,
+.footer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  z-index: 0;
+}
+
 /* ============ REVEAL ANIMATION ============ */
 .reveal {
   opacity: 0;
@@ -87,17 +100,35 @@ ul, ol { list-style: none; }
   gap: var(--space-4);
 }
 .nav__links a {
+  position: relative;
   color: var(--color-white);
   font-size: var(--fs-sm);
   letter-spacing: var(--ls-wide);
   opacity: 0.85;
+  padding-bottom: 4px;
   transition: opacity var(--duration-fast) var(--ease);
 }
+.nav__links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-gold);
+  transition: width var(--duration-fast) var(--ease);
+}
 .nav__links a:hover { opacity: 1; }
+.nav__links a:hover::after { width: 100%; }
 .nav__cta {
   border: 1px solid var(--color-gold);
   padding: var(--space-1) var(--space-2);
   border-radius: var(--radius-sm);
+}
+.nav__cta::after { display: none; }
+.nav__cta:hover {
+  background: var(--color-gold);
+  color: var(--color-navy);
 }
 
 .nav__toggle {
@@ -171,7 +202,7 @@ ul, ol { list-style: none; }
   max-width: var(--container-narrow);
   margin: var(--space-6) auto 0;
   height: 1px;
-  background: linear-gradient(to right, var(--color-gold-muted), transparent);
+  background: linear-gradient(to right, var(--color-gold), var(--color-gold-muted) 40%, transparent);
 }
 
 /* ============ BUTTONS ============ */
@@ -189,13 +220,13 @@ ul, ol { list-style: none; }
   color: var(--color-white);
   border: 1px solid var(--color-navy);
 }
-.btn--primary:hover { background: var(--color-navy-light); }
+.btn--primary:hover { background: var(--color-navy-light); border-color: var(--color-gold); }
 .btn--ghost {
   background: transparent;
   color: var(--color-navy);
   border: 1px solid var(--color-border);
 }
-.btn--ghost:hover { border-color: var(--color-navy); }
+.btn--ghost:hover { border-color: var(--color-gold); color: var(--color-navy); }
 .btn--full { width: 100%; }
 
 /* ============ PRACTICE AREAS ============ */
@@ -204,9 +235,11 @@ ul, ol { list-style: none; }
   gap: var(--space-5);
 }
 .practice__item {
-  border-top: 1px solid var(--color-border);
+  border-top: 2px solid var(--color-gold-muted);
   padding-top: var(--space-3);
+  transition: border-color var(--duration-fast) var(--ease);
 }
+.practice__item:hover { border-color: var(--color-gold); }
 .practice__num {
   font-family: var(--font-serif);
   color: var(--color-gold);
@@ -227,13 +260,16 @@ ul, ol { list-style: none; }
 }
 
 /* ============ APPROACH ============ */
-.approach { background: var(--color-navy); }
+.approach { background: var(--color-navy); position: relative; overflow: hidden; }
 .approach .eyebrow { color: var(--color-gold-muted); }
 .approach .section__title { color: var(--color-white); }
 .approach__blocks {
   display: grid;
   gap: var(--space-5);
+  position: relative;
+  z-index: 1;
 }
+.approach__block { border-left: 2px solid var(--color-gold); padding-left: var(--space-3); }
 .approach__block h3 {
   font-family: var(--font-serif);
   color: var(--color-gold-muted);
@@ -257,7 +293,8 @@ ul, ol { list-style: none; }
   overflow: hidden;
   border-radius: var(--radius-sm);
   margin-bottom: var(--space-2);
-  filter: grayscale(40%);
+  filter: grayscale(35%);
+  border-bottom: 3px solid var(--color-gold-muted);
 }
 .team__photo img { width: 100%; height: 100%; object-fit: cover; }
 .team__card h3 {
@@ -282,9 +319,11 @@ ul, ol { list-style: none; }
   gap: var(--space-4);
 }
 .matters__item {
-  border-left: 2px solid var(--color-gold);
+  border-left: 3px solid var(--color-gold);
   padding: var(--space-1) 0 var(--space-1) var(--space-3);
+  transition: border-color var(--duration-fast) var(--ease), background var(--duration-fast) var(--ease);
 }
+.matters__item:hover { background: rgba(168,135,79,0.05); }
 .matters__tag {
   display: block;
   font-size: var(--fs-xs);
@@ -292,7 +331,7 @@ ul, ol { list-style: none; }
   text-transform: uppercase;
   color: var(--color-gold);
   margin-bottom: var(--space-1);
-  font-weight: 600;
+  font-weight: 700;
 }
 .matters__item p {
   color: var(--color-ink-soft);
@@ -309,6 +348,12 @@ ul, ol { list-style: none; }
   border: 1px solid var(--color-border);
   padding: var(--space-3);
   border-radius: var(--radius-sm);
+  border-top: 3px solid var(--color-gold-muted);
+  transition: border-color var(--duration-fast) var(--ease), box-shadow var(--duration-fast) var(--ease);
+}
+.insight__card:hover {
+  border-top-color: var(--color-gold);
+  box-shadow: var(--shadow-sm);
 }
 .insight__date {
   font-size: var(--fs-xs);
@@ -372,7 +417,7 @@ ul, ol { list-style: none; }
 .field select:focus,
 .field textarea:focus {
   outline: none;
-  border-color: var(--color-navy);
+  border-color: var(--color-gold);
 }
 .field__error {
   display: none;
@@ -432,11 +477,13 @@ ul, ol { list-style: none; }
 }
 
 /* ============ FOOTER ============ */
-.footer { background: var(--color-navy); color: rgba(255,255,255,0.8); }
+.footer { background: var(--color-navy); color: rgba(255,255,255,0.8); position: relative; overflow: hidden; }
 .footer__grid {
   display: grid;
   gap: var(--space-4);
   padding-bottom: var(--space-4);
+  position: relative;
+  z-index: 1;
 }
 .footer__logo {
   font-family: var(--font-serif);
@@ -462,12 +509,16 @@ ul, ol { list-style: none; }
   font-size: var(--fs-sm);
   margin-bottom: 6px;
   color: rgba(255,255,255,0.7);
+  transition: color var(--duration-fast) var(--ease);
 }
+.footer__col a:hover { color: var(--color-gold-muted); }
 .footer__bottom {
   border-top: 1px solid var(--color-border-dark);
   padding-top: var(--space-3);
   font-size: var(--fs-xs);
   color: rgba(255,255,255,0.5);
+  position: relative;
+  z-index: 1;
 }
 .footer__bar { margin-top: var(--space-1); max-width: 70ch; }
 
